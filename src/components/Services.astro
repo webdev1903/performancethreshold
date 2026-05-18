@@ -1,0 +1,78 @@
+---
+const services = [
+  {
+    title: 'Strength Development',
+    body: 'Heavy compounds, accessory architecture and intelligent progression. Built around your structure, not a template.',
+  },
+  {
+    title: 'Conditioning',
+    body: 'Energy-system specific work — aerobic base, lactate tolerance, alactic power. The right gear, the right day.',
+  },
+  {
+    title: 'Athletic Performance',
+    body: 'Speed, power, change-of-direction and contact readiness for sport-specific demands. From off-season to in-season.',
+  },
+  {
+    title: 'Mobility & Resilience',
+    body: 'Joint capacity, tissue health and longevity work. Train hard, last long.',
+  },
+];
+---
+
+<section
+  id="services"
+  class="relative min-h-dvh flex items-center px-6 sm:px-10 py-24 sm:py-32 border-t border-bone/5"
+>
+  <div class="mx-auto max-w-7xl w-full">
+    <div class="max-w-3xl mb-14 sm:mb-20">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="h-px w-12 bg-rust-soft"></span>
+        <span class="font-mono text-xs uppercase tracking-[0.32em] text-bone-dim">03 — Discipline</span>
+      </div>
+      <h2 class="font-display font-light text-balance leading-[0.92] tracking-[-0.015em] text-5xl sm:text-7xl">
+        What I <span class="italic text-rust-soft">do</span>.
+      </h2>
+      <p class="mt-6 text-bone-dim text-lg max-w-xl leading-relaxed">
+        [Placeholder] Four disciplines, one philosophy: train the athlete in
+        front of you. No copy-paste programs.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-px bg-bone/10 border border-bone/10">
+      {services.map((s, i) => (
+        <article class="bg-ink p-8 sm:p-10 group hover:bg-ink-2 transition-colors relative">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-xs text-rust-soft">0{i + 1}</span>
+            <span class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-soft opacity-0 group-hover:opacity-100 transition-opacity">
+              Discipline
+            </span>
+          </div>
+          <h3 class="mt-6 font-display text-3xl sm:text-4xl leading-none">{s.title}</h3>
+          <p class="mt-5 text-bone-dim text-sm leading-relaxed max-w-md">{s.body}</p>
+          <span class="absolute bottom-0 left-0 h-px w-0 bg-rust-soft transition-all duration-500 group-hover:w-full"></span>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-10 overflow-hidden border-y border-bone/10 py-3">
+      <div class="flex gap-12 whitespace-nowrap animate-[ticker_30s_linear_infinite] font-display italic text-2xl sm:text-3xl text-bone-soft">
+        {Array.from({ length: 2 }).map(() => (
+          <span class="flex gap-12">
+            <span>Strength</span><span>·</span>
+            <span>Conditioning</span><span>·</span>
+            <span>Mobility</span><span>·</span>
+            <span>Performance</span><span>·</span>
+            <span>Resilience</span><span>·</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

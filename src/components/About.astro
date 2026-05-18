@@ -1,0 +1,93 @@
+---
+const coach = {
+  name: 'Akshay Waghmare',
+  designation: 'Strength & Conditioning Coach',
+  bio: `[Placeholder bio — 3 to 5 sentences. Talk about origin: athletic background, what drew them to coaching, philosophy of training, who they work with. Voice should sound like the coach themself, calm and certain.]`,
+  stats: [
+    { label: 'Experience', value: '12+', suffix: 'yrs' },
+    { label: 'Athletes coached', value: '200', suffix: '+' },
+  ],
+  credentials: [
+    'NSCA — Certified Strength & Conditioning Specialist (CSCS)',
+    'FRC — Functional Range Conditioning Mobility Specialist',
+    'USAW Level 1 Sports Performance Coach',
+    'B.Sc. — Sports & Exercise Science',
+  ],
+};
+---
+
+<section
+  id="about"
+  class="relative min-h-dvh flex items-center px-6 sm:px-10 py-24 sm:py-32 border-t border-bone/5"
+>
+  <div class="mx-auto max-w-7xl w-full grid md:grid-cols-12 gap-10 md:gap-16 items-center">
+    <!-- portrait -->
+    <div class="md:col-span-5 relative">
+      <div class="relative aspect-[4/5] w-full overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80"
+          alt="Coach portrait"
+          class="absolute inset-0 w-full h-full object-cover grayscale contrast-110 saturate-0"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent"></div>
+      </div>
+      <div class="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 hidden sm:block">
+        <div class="font-display italic text-[5rem] sm:text-[7rem] leading-none text-rust-soft/15 select-none">
+          02
+        </div>
+      </div>
+      <div class="absolute -bottom-4 -right-4 hidden sm:flex flex-col items-end font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-dim">
+        <span>Portrait</span>
+        <span class="text-bone-soft">— Studio, 2024</span>
+      </div>
+    </div>
+
+    <!-- copy -->
+    <div class="md:col-span-7">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="h-px w-12 bg-rust-soft"></span>
+        <span class="font-mono text-xs uppercase tracking-[0.32em] text-bone-dim">02 — Who Am I</span>
+      </div>
+
+      <h2 class="font-display font-light text-balance leading-[0.92] tracking-[-0.015em] text-5xl sm:text-7xl">
+        {coach.name}
+      </h2>
+      <p class="mt-3 font-display italic text-xl sm:text-2xl text-rust-soft">
+        {coach.designation}
+      </p>
+
+      <p class="mt-8 max-w-xl text-bone-dim leading-relaxed">
+        {coach.bio}
+      </p>
+
+      <dl class="mt-10 grid grid-cols-2 gap-6 max-w-md">
+        {coach.stats.map((s) => (
+          <div class="border-l border-bone/15 pl-4">
+            <dt class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-soft">
+              {s.label}
+            </dt>
+            <dd class="mt-2 font-display text-4xl sm:text-5xl leading-none">
+              {s.value}
+              <span class="text-rust-soft text-2xl align-top">{s.suffix}</span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="mt-12 pt-8 border-t border-bone/10">
+        <h3 class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-soft mb-4">
+          Credentials
+        </h3>
+        <ul class="space-y-2 text-sm text-bone-dim">
+          {coach.credentials.map((c) => (
+            <li class="flex gap-3">
+              <span class="text-rust-soft mt-2 h-px w-3 shrink-0 bg-current"></span>
+              <span>{c}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

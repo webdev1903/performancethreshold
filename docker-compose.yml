@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    container_name: wp-astro
+    ports:
+      - "4321:4321"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev -- --host 0.0.0.0
+    stdin_open: true
+    tty: true

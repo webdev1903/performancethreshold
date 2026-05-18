@@ -1,0 +1,232 @@
+---
+type Testimonial =
+  | { type: 'text'; quote: string; author: string; role: string }
+  | { type: 'photo'; quote: string; author: string; role: string; img: string }
+  | { type: 'video'; quote?: string; author: string; role: string; poster: string; src?: string };
+
+const testimonials: Testimonial[] = [
+  {
+    type: 'text',
+    quote:
+      'The most intentional coaching I have ever received. Every session has purpose, every block has a reason.',
+    author: '[Athlete A]',
+    role: 'Pro Footballer',
+  },
+  {
+    type: 'photo',
+    quote:
+      'Three months in and my back squat moved from 140 to 180. More importantly, I feel built to last.',
+    author: '[Athlete B]',
+    role: 'Powerlifter',
+    img: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    type: 'video',
+    author: '[Athlete C]',
+    role: 'MMA',
+    poster:
+      'https://images.unsplash.com/photo-1517438476312-10d79c077509?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    type: 'text',
+    quote:
+      'He reads the body better than anyone. The program adapts the moment my readiness shifts.',
+    author: '[Athlete D]',
+    role: 'Track Sprinter',
+  },
+  {
+    type: 'photo',
+    quote:
+      'Came back from a long injury stronger than before. Patience, precision, no shortcuts.',
+    author: '[Athlete E]',
+    role: 'Rugby Union',
+    img: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    type: 'video',
+    author: '[Athlete F]',
+    role: 'Olympic Lifter',
+    poster:
+      'https://images.unsplash.com/photo-1583500178690-f7fd39d44204?auto=format&fit=crop&w=900&q=80',
+  },
+];
+---
+
+<section
+  id="testimonials"
+  class="relative min-h-dvh flex items-center px-6 sm:px-10 py-24 sm:py-32 border-t border-bone/5 overflow-hidden"
+>
+  <div class="mx-auto max-w-7xl w-full">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-12 sm:mb-16">
+      <div>
+        <div class="flex items-center gap-4 mb-8">
+          <span class="h-px w-12 bg-rust-soft"></span>
+          <span class="font-mono text-xs uppercase tracking-[0.32em] text-bone-dim">05 — Voices</span>
+        </div>
+        <h2 class="font-display font-light leading-[0.92] tracking-[-0.015em] text-5xl sm:text-7xl">
+          Testimonials.
+        </h2>
+        <p class="mt-6 text-bone-dim max-w-lg text-base sm:text-lg leading-relaxed">
+          [Placeholder] In their words.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button
+          id="tPrev"
+          aria-label="Previous"
+          class="w-12 h-12 border border-bone/15 hover:border-rust-soft hover:text-rust-soft transition-colors flex items-center justify-center"
+        >
+          ←
+        </button>
+        <button
+          id="tNext"
+          aria-label="Next"
+          class="w-12 h-12 border border-bone/15 hover:border-rust-soft hover:text-rust-soft transition-colors flex items-center justify-center"
+        >
+          →
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="tTrack"
+      class="flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-6 sm:-mx-10 px-6 sm:px-10 pb-6 scroll-smooth"
+    >
+      {testimonials.map((t, i) => (
+        <article
+          data-card
+          class="snap-start shrink-0 w-[85vw] sm:w-[60vw] md:w-[44vw] lg:w-[30vw] min-h-[26rem]"
+        >
+          {t.type === 'text' && (
+            <div class="relative h-full p-8 sm:p-10 border border-bone/10 hover:border-bone/25 transition-colors flex flex-col bg-ink-2">
+              <span class="font-display italic text-7xl text-rust-soft/30 leading-none">"</span>
+              <p class="mt-2 font-display text-2xl sm:text-3xl leading-snug text-balance">
+                {t.quote}
+              </p>
+              <div class="mt-auto pt-10">
+                <div class="font-mono text-xs uppercase tracking-[0.22em] text-bone">{t.author}</div>
+                <div class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-soft mt-1">
+                  {t.role}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {t.type === 'photo' && (
+            <div class="relative h-full overflow-hidden border border-bone/10">
+              <img
+                src={t.img}
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover grayscale contrast-110"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/10"></div>
+              <div class="relative h-full flex flex-col justify-end p-8 sm:p-10">
+                <span class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-rust-soft">
+                  Photo + Word
+                </span>
+                <p class="mt-4 font-display text-xl sm:text-2xl leading-snug text-balance">
+                  {t.quote}
+                </p>
+                <div class="mt-8">
+                  <div class="font-mono text-xs uppercase tracking-[0.22em]">{t.author}</div>
+                  <div class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-soft mt-1">
+                    {t.role}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {t.type === 'video' && (
+            <button
+              type="button"
+              data-video-card
+              class="group relative h-full w-full overflow-hidden border border-bone/10 block text-left"
+            >
+              <img
+                src={t.poster}
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-ink/40 group-hover:bg-ink/30 transition-colors"></div>
+
+              <div class="relative h-full flex flex-col justify-between p-8 sm:p-10">
+                <span class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-rust-soft">
+                  Video — {(i + 1).toString().padStart(2, '0')}
+                </span>
+
+                <div class="self-center my-auto flex flex-col items-center gap-4">
+                  <span class="w-16 h-16 rounded-full border border-bone flex items-center justify-center group-hover:bg-rust-soft group-hover:border-rust-soft transition-colors">
+                    <span class="ml-1 border-y-[10px] border-y-transparent border-l-[16px] border-l-bone group-hover:border-l-ink"></span>
+                  </span>
+                  <span class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-dim">
+                    Play story
+                  </span>
+                </div>
+
+                <div>
+                  <div class="font-mono text-xs uppercase tracking-[0.22em]">{t.author}</div>
+                  <div class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-soft mt-1">
+                    {t.role}
+                  </div>
+                </div>
+              </div>
+            </button>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <!-- progress dots -->
+    <div id="tDots" class="mt-8 flex gap-2 justify-center"></div>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('tTrack') as HTMLElement;
+  const prev = document.getElementById('tPrev')!;
+  const next = document.getElementById('tNext')!;
+  const dots = document.getElementById('tDots')!;
+  const cards = track.querySelectorAll<HTMLElement>('[data-card]');
+
+  const step = () => {
+    const card = cards[0];
+    if (!card) return 0;
+    const style = getComputedStyle(track);
+    const gap = parseFloat(style.columnGap || style.gap || '0');
+    return card.getBoundingClientRect().width + gap;
+  };
+
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+  cards.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    d.className = 'h-px w-6 bg-bone/20 transition-colors';
+    d.addEventListener('click', () => track.scrollTo({ left: step() * i, behavior: 'smooth' }));
+    dots.appendChild(d);
+  });
+
+  const updateDots = () => {
+    const s = step() || 1;
+    const idx = Math.round(track.scrollLeft / s);
+    dots.querySelectorAll('button').forEach((d, i) => {
+      d.className = `h-px transition-all duration-300 ${
+        i === idx ? 'w-10 bg-rust-soft' : 'w-6 bg-bone/20'
+      }`;
+    });
+  };
+  track.addEventListener('scroll', updateDots, { passive: true });
+  updateDots();
+
+  // video card placeholder click — wire to modal/play later
+  track.querySelectorAll('[data-video-card]').forEach((b) =>
+    b.addEventListener('click', () => {
+      console.info('[testimonials] video card clicked — wire to modal/player');
+    })
+  );
+</script>

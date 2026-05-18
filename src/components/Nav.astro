@@ -1,0 +1,123 @@
+---
+const links = [
+  { href: '#hero', label: 'Home', n: '01' },
+  { href: '#about', label: 'Who', n: '02' },
+  { href: '#services', label: 'Discipline', n: '03' },
+  { href: '#offerings', label: 'Programs', n: '04' },
+  { href: '#testimonials', label: 'Voices', n: '05' },
+];
+---
+
+<header
+  id="siteNav"
+  class="fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color] duration-300 border-b border-transparent"
+  data-scrolled="false"
+>
+  <nav class="mx-auto max-w-7xl px-6 sm:px-10 h-16 sm:h-20 flex items-center justify-between">
+    <a href="#hero" class="font-display text-2xl tracking-tight leading-none">
+      P<span class="text-rust-soft">T</span>.
+    </a>
+
+    <ul class="hidden md:flex items-center gap-10">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            data-nav={l.href}
+            class="group relative font-mono text-xs uppercase tracking-[0.22em] text-bone-dim hover:text-bone transition-colors flex items-center gap-3"
+          >
+            <span class="before:content-[''] before:absolute before:-left-6 before:top-1/2 before:-translate-y-1/2 before:h-px before:w-0 before:bg-bone-soft before:transition-all before:duration-300 group-hover:before:w-4">
+              <span class="text-bone-soft mr-2">{l.n}</span>{l.label}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href="#offerings"
+      class="hidden md:inline-flex items-center font-mono text-xs uppercase tracking-[0.22em] text-bone-dim hover:text-rust-soft transition-colors"
+    >
+      Enquire <span class="ml-2">→</span>
+    </a>
+
+    <button
+      id="menuBtn"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      class="md:hidden p-2 -mr-2 text-bone"
+    >
+      <span class="block w-6 h-px bg-current mb-1.5"></span>
+      <span class="block w-6 h-px bg-current"></span>
+    </button>
+  </nav>
+
+  <div
+    id="mobilePanel"
+    class="md:hidden fixed inset-0 top-16 bg-ink/95 backdrop-blur-md translate-x-full transition-transform duration-300 ease-out"
+  >
+    <ul class="flex flex-col gap-6 px-6 py-10">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            data-mobile-link
+            class="block font-display text-4xl tracking-tight"
+          >
+            <span class="font-mono text-xs text-rust-soft align-top mr-3">{l.n}</span>
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  const nav = document.getElementById('siteNav')!;
+  const btn = document.getElementById('menuBtn')!;
+  const panel = document.getElementById('mobilePanel')!;
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav]');
+  const mobileLinks = document.querySelectorAll<HTMLAnchorElement>('[data-mobile-link]');
+
+  const onScroll = () => {
+    const scrolled = window.scrollY > 40;
+    nav.dataset.scrolled = String(scrolled);
+    if (scrolled) {
+      nav.classList.add('bg-ink/80', 'backdrop-blur-md', 'border-bone/10');
+    } else {
+      nav.classList.remove('bg-ink/80', 'backdrop-blur-md', 'border-bone/10');
+    }
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const closeMobile = () => {
+    panel.classList.add('translate-x-full');
+    btn.setAttribute('aria-expanded', 'false');
+  };
+  btn.addEventListener('click', () => {
+    const open = panel.classList.toggle('translate-x-full');
+    btn.setAttribute('aria-expanded', String(!open));
+  });
+  mobileLinks.forEach((a) => a.addEventListener('click', closeMobile));
+
+  const sections = Array.from(links)
+    .map((a) => document.querySelector(a.getAttribute('href')!))
+    .filter(Boolean) as HTMLElement[];
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = '#' + e.target.id;
+          links.forEach((a) => {
+            a.classList.toggle('is-active', a.dataset.nav === id);
+          });
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  sections.forEach((s) => observer.observe(s));
+</script>

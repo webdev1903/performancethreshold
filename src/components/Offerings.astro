@@ -1,0 +1,102 @@
+---
+const offerings = [
+  {
+    tag: 'A — In-Person',
+    title: '1-on-1 Coaching',
+    desc: 'Sessions at the studio. Hands-on, technical and progressive.',
+    features: [
+      'Movement assessment',
+      'Quarterly programming review',
+      'In-session coaching',
+      'Direct messaging access',
+    ],
+    cta: 'Enquire',
+  },
+  {
+    tag: 'B — Remote',
+    title: 'Online Programming',
+    desc: 'For self-driven athletes. Programs built around your goals, gear and weekly rhythm.',
+    features: [
+      'Custom monthly programming',
+      'Form check reviews',
+      'Weekly check-ins',
+      'Adjustments on demand',
+    ],
+    cta: 'Apply',
+    featured: true,
+  },
+  {
+    tag: 'C — Squad',
+    title: 'Team Performance',
+    desc: 'Pre-season build, in-season maintenance, off-season power blocks for teams and squads.',
+    features: [
+      'Periodised team plans',
+      'On-site testing days',
+      'Coach-to-coach handoffs',
+      'Athlete reporting',
+    ],
+    cta: 'Get in touch',
+  },
+];
+---
+
+<section
+  id="offerings"
+  class="relative min-h-dvh flex items-center px-6 sm:px-10 py-24 sm:py-32 border-t border-bone/5"
+>
+  <div class="mx-auto max-w-7xl w-full">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-14 sm:mb-20">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-4 mb-8">
+          <span class="h-px w-12 bg-rust-soft"></span>
+          <span class="font-mono text-xs uppercase tracking-[0.32em] text-bone-dim">04 — Programs</span>
+        </div>
+        <h2 class="font-display font-light text-balance leading-[0.92] tracking-[-0.015em] text-5xl sm:text-7xl">
+          What I <span class="italic text-rust-soft">offer</span>.
+        </h2>
+      </div>
+      <p class="text-bone-dim max-w-md text-sm sm:text-base leading-relaxed">
+        [Placeholder] Three lanes. Pick the one that fits your life — programs
+        are adjusted for the athlete, never the other way around.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {offerings.map((o) => (
+        <article
+          class:list={[
+            'group relative flex flex-col p-8 sm:p-10 border transition-colors',
+            o.featured
+              ? 'border-rust-soft bg-rust/5'
+              : 'border-bone/10 hover:border-bone/25',
+          ]}
+        >
+          {o.featured && (
+            <span class="absolute -top-3 left-8 bg-ink px-2 font-mono text-[0.65rem] uppercase tracking-[0.32em] text-rust-soft">
+              Most popular
+            </span>
+          )}
+          <span class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-soft">
+            {o.tag}
+          </span>
+          <h3 class="mt-4 font-display text-3xl sm:text-4xl leading-tight">{o.title}</h3>
+          <p class="mt-3 text-bone-dim text-sm leading-relaxed">{o.desc}</p>
+          <ul class="mt-8 space-y-3 text-sm text-bone-dim">
+            {o.features.map((f) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-2 h-px w-3 shrink-0 bg-rust-soft"></span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="#"
+            class="mt-auto pt-10 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-rust-soft group-hover:gap-5 transition-all"
+          >
+            {o.cta} <span>→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

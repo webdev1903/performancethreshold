@@ -1,0 +1,80 @@
+---
+// Drop your video file at: public/hero.mp4 (mp4, h.264, muted, ~10-30s loop, ≤ 8 MB recommended)
+// Optional poster image: public/hero-poster.jpg
+---
+
+<section id="hero" class="relative h-dvh min-h-[640px] w-full overflow-hidden">
+  <!-- fallback poster (shown if video missing/loading) -->
+  <div
+    class="absolute inset-0 bg-cover bg-center"
+    style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1920&q=80');"
+  ></div>
+
+  <video
+    class="absolute inset-0 w-full h-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="/hero-poster.jpg"
+  >
+    <source src="/hero.mp4" type="video/mp4" />
+  </video>
+
+  <!-- overlays -->
+  <div class="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/55 to-ink"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,transparent_0%,rgba(13,12,10,0.6)_70%)]"></div>
+
+  <!-- content -->
+  <div class="relative h-full mx-auto max-w-7xl px-6 sm:px-10 flex flex-col">
+    <div class="flex-1 flex flex-col justify-end pb-16 sm:pb-24">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="h-px w-12 bg-rust-soft"></span>
+        <span class="font-mono text-[0.7rem] sm:text-xs uppercase tracking-[0.32em] text-bone-dim">
+          01 — The Programme
+        </span>
+      </div>
+
+      <h1 class="font-display font-light text-balance leading-[0.86] tracking-[-0.02em] text-[clamp(3rem,11vw,10.5rem)]">
+        Performance<br />
+        <span class="italic text-rust-soft">Threshold</span>
+      </h1>
+
+      <p class="mt-8 max-w-xl text-base sm:text-lg text-bone-dim font-light leading-relaxed">
+        [Placeholder description — one or two sentences. Replace with the coach's
+        positioning statement: what they train, who for, what changes.]
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-6">
+        <a
+          href="#offerings"
+          class="group inline-flex items-center gap-3 px-6 py-3 border border-bone/20 hover:border-rust-soft hover:bg-rust/10 transition-colors font-mono text-xs uppercase tracking-[0.22em]"
+        >
+          See programs
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </a>
+        <a
+          href="#about"
+          class="font-mono text-xs uppercase tracking-[0.22em] text-bone-dim hover:text-bone transition-colors"
+        >
+          About the coach
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <span class="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-bone-dim">scroll</span>
+      <span class="h-10 w-px bg-bone/30 relative overflow-hidden">
+        <span class="absolute top-0 left-0 h-4 w-full bg-rust-soft animate-[slide_1.8s_ease-in-out_infinite]"></span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes slide {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(250%); }
+  }
+</style>
