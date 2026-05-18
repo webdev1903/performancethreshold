@@ -22,10 +22,13 @@ html {
   color: var(--color-bone);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 body {
   font-family: var(--font-sans);
+  overflow-x: clip;
+  max-width: 100vw;
 }
 
 .font-display {
