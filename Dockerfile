@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1.7
-
 # ---- base: shared deps ----
 FROM node:22-alpine AS base
 WORKDIR /app
@@ -18,11 +16,12 @@ ENV NODE_ENV=production
 COPY . .
 RUN npm run build
 
-# ---- runner: production image ----
+# ---- runner: production image (zero npm deps at runtime) ----
 FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-RUN npm install -g serve@14
+ENV HOST=0.0.0.0
 COPY --from=build /app/dist ./dist
-EXPOSE 4321
-CMD ["sh", "-c", "serve dist -l tcp://0.0.0.0:${PORT:-4321}"]
+COPY server.mjs ./
+EXPOSE 8080
+CMD ["node", "server.mjs"]
