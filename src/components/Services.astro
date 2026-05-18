@@ -54,10 +54,10 @@ const services = [
       ))}
     </div>
 
-    <div class="mt-10 overflow-hidden border-y border-bone/10 py-3">
-      <div class="flex gap-12 whitespace-nowrap animate-[ticker_30s_linear_infinite] font-display italic text-2xl sm:text-3xl text-bone-soft">
+    <div class="relative mt-10 h-14 sm:h-16 overflow-hidden border-y border-bone/10">
+      <div class="absolute inset-y-0 left-0 flex items-center gap-12 whitespace-nowrap animate-[ticker_30s_linear_infinite] font-display italic text-2xl sm:text-3xl text-bone-soft will-change-transform">
         {Array.from({ length: 2 }).map(() => (
-          <span class="flex gap-12">
+          <span class="flex items-center gap-12">
             <span>Strength</span><span>·</span>
             <span>Conditioning</span><span>·</span>
             <span>Mobility</span><span>·</span>
