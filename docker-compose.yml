@@ -1,6 +1,8 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      target: dev
     container_name: wp-astro
     ports:
       - "4321:4321"
